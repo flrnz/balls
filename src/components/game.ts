@@ -1,4 +1,4 @@
-import { Point, Path, PaperScope, View, Layer, Project, Gradient, PointText } from "paper";
+import { Point, Path, PaperScope, View, Layer, PointText } from "paper";
 import { IWH, IXY } from "../sharedInterfaces";
 import { EnemyCircle } from "./enemy";
 import { ScrollService } from "./scroll";
@@ -239,7 +239,7 @@ export class Game {
             this.dimEnemyBoundCounter += this.player.movementVector.length;
         }
 
-        if (this.newEnemyCounter > 3000) {
+        if (this.newEnemyCounter > 4000) {
             this.newEnemyCounter = 0;
             this.enemies.push(new EnemyCircle(this, {}));
         }

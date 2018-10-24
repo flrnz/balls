@@ -32,8 +32,8 @@ export class EnemyCircle {
         this.gameRef = gameRef;
 
         this.speed = {
-            min: args.minSpeed || this.gameRef.boundRadius/500,
-            max: args.maxSpeed || this.gameRef.boundRadius/150,
+            min: args.minSpeed || this.gameRef.boundRadius/600,
+            max: args.maxSpeed || this.gameRef.boundRadius/200,
             curr: args.minSpeed || this.gameRef.boundRadius/500
         }
 
