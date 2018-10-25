@@ -122,7 +122,7 @@ export class Game {
 
         //Gravity stuff
         this.gravity = new Point(1, 1);
-        this.gravity.length = this.boundRadius/1000;
+        this.gravity.length = this.boundRadius/880;
         this.gravity.angle = -90;
 
         //Difficulty stuff
@@ -367,7 +367,7 @@ class PlayerCircle {
         this.movementVector = new Point(0,0);
         this.movementVector.angle = 0;
 
-        this.paperObj = new Path.Circle(this.spawnPoint, this.gameRef.boundRadius/20);
+        this.paperObj = new Path.Circle(this.spawnPoint, this.gameRef.boundRadius/20) ;
         
         this.paperObj.style = {
             fillColor: "blue",
