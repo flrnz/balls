@@ -101,9 +101,9 @@ export class Game {
         console.log(this.boundRadius);
 
         //FIXME: Debug stuff for mobile devices
-        if (this.boundRadius < 350) {
-            this.boundRadius *= 1.4;
-        }
+        // if (this.boundRadius < 350) {
+        //     this.boundRadius *= 1.1;
+        // }
 
         //Movement stuff
         this.playerCircleSpeed = 3;
@@ -255,7 +255,7 @@ export class Game {
         //Score & Counters
         if (this.player.movementVector.length >= 3.5 * (this.boundRadius/450)) {
             this.score += this.player.movementVector.length * (450/this.boundRadius);
-            this.newEnemyCounter += this.player.movementVector.length * (450/this.boundRadius/450);
+            this.newEnemyCounter += this.player.movementVector.length * (450/this.boundRadius);
             this.dimEnemyBoundCounter += this.player.movementVector.length * (450/this.boundRadius);
         }
 
