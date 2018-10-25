@@ -97,7 +97,8 @@ export class Game {
         this.mouseDown = false;
 
         //Bound stuff
-        this.boundRadius = 400;
+        this.boundRadius = Math.min(this.view.bounds.width, this.view.bounds.height) / 2.52;
+        console.log(this.boundRadius);
 
         //Movement stuff
         this.playerCircleSpeed = 3;
@@ -121,7 +122,7 @@ export class Game {
 
         //Gravity stuff
         this.gravity = new Point(1, 1);
-        this.gravity.length = 0.5;
+        this.gravity.length = this.boundRadius/1000;
         this.gravity.angle = -90;
 
         //Difficulty stuff
@@ -269,7 +270,7 @@ export class Game {
             let acc = new Point(1, 1);
             acc.angle = vectorToPlayerCircle.angle;
 
-            let accL = 750/vectorToPlayerCircle.length;
+            let accL = (this.boundRadius*1.5)/vectorToPlayerCircle.length;
             if (accL < 3) {accL = 0};
             if (accL > 50) {accL = 50};
 
@@ -302,7 +303,7 @@ export class Game {
     onNoHealth() {
         this.lost = true;
 
-        let restartThingy = new Path.Circle(new Point(this.center.x, this.center.y + 300), 20);
+        let restartThingy = new Path.Circle(new Point(this.center.x, this.center.y + this.boundRadius/1.8), 20);
 
         restartThingy.fillColor = "white";
         restartThingy.strokeColor = "black";
@@ -366,7 +367,7 @@ class PlayerCircle {
         this.movementVector = new Point(0,0);
         this.movementVector.angle = 0;
 
-        this.paperObj = new Path.Circle(this.spawnPoint, 20);
+        this.paperObj = new Path.Circle(this.spawnPoint, this.gameRef.boundRadius/20);
         
         this.paperObj.style = {
             fillColor: "blue",
