@@ -100,6 +100,11 @@ export class Game {
         this.boundRadius = Math.min(this.view.bounds.width, this.view.bounds.height) / 2.52;
         console.log(this.boundRadius);
 
+        //FIXME: Debug stuff for mobile devices
+        if (this.boundRadius < 350) {
+            this.boundRadius *= 1.4;
+        }
+
         //Movement stuff
         this.playerCircleSpeed = 3;
 
@@ -218,10 +223,16 @@ export class Game {
         }
 
         this.view.element.addEventListener("contextmenu", (e) => {
-            console.log(this.lost, this.paused);
-
             if (!(this.lost || this.paused)) {
                 e.preventDefault();
+            }
+        })
+
+        this.view.element.addEventListener("wheel", (e) => {
+            if (e.deltaY < 0) {
+                this.view.scale(1.01);
+            } else {
+                this.view.scale(0.99);
             }
         })
 
@@ -229,15 +240,23 @@ export class Game {
             if (e.code === "KeyP" || e.code === "Space") {
                 this.paused = !this.paused;
             }
+
+            if (e.code === "KeyW") {
+                this.view.scale(1.05);
+            }
+
+            if (e.code === "KeyS") {
+                this.view.scale(0.95);
+            }
         }
     }
 
     onFrameDefault = () => {
         //Score & Counters
-        if (this.player.movementVector.length >= 3.5) {
-            this.score += this.player.movementVector.length;
-            this.newEnemyCounter += this.player.movementVector.length;
-            this.dimEnemyBoundCounter += this.player.movementVector.length;
+        if (this.player.movementVector.length >= 3.5 * (this.boundRadius/450)) {
+            this.score += this.player.movementVector.length * (450/this.boundRadius);
+            this.newEnemyCounter += this.player.movementVector.length * (450/this.boundRadius/450);
+            this.dimEnemyBoundCounter += this.player.movementVector.length * (450/this.boundRadius);
         }
 
         if (this.newEnemyCounter > 4000) {
